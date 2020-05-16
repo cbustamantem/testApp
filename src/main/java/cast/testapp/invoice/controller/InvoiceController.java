@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cast.testapp.facturacion.boundary;
+package cast.testapp.invoice.controller;
 
 /**
  *
  * @author cbustamante
  */
-public class FacturaManager {
-    
-    
+public class InvoiceController {
     
 }
