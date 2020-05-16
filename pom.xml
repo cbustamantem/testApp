@@ -8,51 +8,68 @@
         <version>2.2.4.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>py.com.testing</groupId>
-    <artifactId>testApp</artifactId>
+    <groupId>cast.testapp</groupId>
+    <artifactId>facturacion</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>CAST.Facturacion</name>
     <description>Cast Facturacion</description>
+ 
     <properties>
         <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <sonar.projectKey>CAST.Facturacion</sonar.projectKey>
+        <sonar.projectName>CAST.Facturacion</sonar.projectName>
+        <sonar.sources>src/main/java/</sonar.sources>
+        <sonar.test>src/test/java/</sonar.test>
+        <junit-jupiter.version>5.5.2</junit-jupiter.version>
+        <assertj-version>3.14.0</assertj-version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
+    <dependencies>        
         <dependency>
             <groupId>cast.testapp</groupId>
             <artifactId>catastro</artifactId>
             <version>1.0-SNAPSHOT</version>
-        </dependency>
+        </dependency>        
+        
         <dependency>
-            <groupId>py.consultores</groupId>
-            <artifactId>javaGenerators</artifactId>
-            <version>1.0.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit-jupiter.version}</version>
             <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.junit.vintage</groupId>
-                    <artifactId>junit-vintage-engine</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
-    </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+        <!-- Parameterized Tests -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>${junit-jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <!-- use 2.9.1 for Java 7 projects -->
+            <version>${assertj-version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.200</version>
+        </dependency>
+        
+    </dependencies>
+   
     <distributionManagement>
         <snapshotRepository>
             <id>nexus-snapshots</id>
