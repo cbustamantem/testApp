@@ -5,14 +5,13 @@
  */
 package cast.testapp.invoice.boundary;
 
-import cast.testapp.invoice.entities.Invoice;
-import cast.testapp.utils.GenericDao;
-import java.util.List;
+import java.io.File;
 
 /**
  *
  * @author cbustamante
  */
-public interface InvoiceManager extends GenericDao<Invoice,Integer> {
-    public Boolean addBulk(List<Invoice> list);
+public interface InvoiceFileReader {
+    public File readFile(String filePath);
+    public Boolean validateLine(String line);
 }

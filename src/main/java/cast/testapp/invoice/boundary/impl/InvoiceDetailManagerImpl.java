@@ -1,4 +1,4 @@
-package cast.testapp.invoice.boundary;
+package cast.testapp.invoice.boundary.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,7 +9,7 @@ import util.ConnectionManager;
 import java.sql.SQLException;
 import cast.testapp.invoice.entities.InvoiceDetail;
 
-public class InvoiceDetailManager {
+public class InvoiceDetailManagerImpl {
 
 	private static final long serialVersionUID = 1L;
 
@@ -105,7 +105,7 @@ public class InvoiceDetailManager {
 	}
 
 	public static void main(String[] args) {
-		List<InvoiceDetail> listInvoiceDetail = new InvoiceDetailManager()
+		List<InvoiceDetail> listInvoiceDetail = new InvoiceDetailManagerImpl()
 				.getInvoiceDetail();
 		listInvoiceDetail
 				.forEach(i -> System.out.println("d: " + i.toString()));
