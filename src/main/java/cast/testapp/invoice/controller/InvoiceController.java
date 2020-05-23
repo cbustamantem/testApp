@@ -43,8 +43,7 @@ public class InvoiceController {
     public Boolean importarFacturasCsv(String filePath) {
         try {
             // Leer el archivo
-            File csvFile = fileReader.readFile(filePath);
-            
+            File csvFile = fileReader.readFile(filePath);            
             //Ciclo por linea
             //Validar linea
             //Validar encabezado
