@@ -9,7 +9,11 @@ import cast.testapp.invoice.boundary.InvoiceFileReader;
 import cast.testapp.invoice.boundary.impl.InvoiceFileReaderImpl;
 import cast.testapp.invoice.boundary.InvoiceManager;
 import cast.testapp.invoice.boundary.impl.InvoiceManagerImpl;
+import cast.testapp.invoice.entities.Invoice;
 import java.io.File;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -34,6 +38,11 @@ public class InvoiceController {
         invoiceMgr = new InvoiceManagerImpl();
         fileReader = new InvoiceFileReaderImpl();
     }
+    
+    public List<Invoice> listPendingInvoicesByClient(Long idCliente, Date date){
+        //BR1	Listar Facturas Pendientes por cliente, fecha de vencimiento
+        return Collections.EMPTY_LIST;
+    }
 
     public InvoiceController(InvoiceManager invoiceMgr, InvoiceFileReader fileReader) {
         this.invoiceMgr = invoiceMgr;
@@ -56,5 +65,6 @@ public class InvoiceController {
         }
         return false;
     }
+   
 
 }
