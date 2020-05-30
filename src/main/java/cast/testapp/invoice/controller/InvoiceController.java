@@ -76,7 +76,8 @@ public class InvoiceController {
         //Calcular ivas
         invoice = new Invoice();
         invoice.setCustomerCode(customer.numeroDoc);
-        if( invoiceMgr.create(invoice) == 0){
+        int result = invoiceMgr.create(invoice);
+        if(result == 0){
             throw new IllegalStateException("NO pudo insertar");
         }
         return invoice;

@@ -14,7 +14,7 @@ import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-class InvoiceControllerTest {
+public class InvoiceControllerTest {
 
     InvoiceManager invoiceManagerMock;
     InvoiceFileReader invoiceFileReaderMock;
