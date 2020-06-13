@@ -5,7 +5,7 @@
  */
 package cast.testapp.invoice.controller;
 
-import cast.testapp.catastro.entities.Cliente;
+import cast.testapp.catastro.clientes.Cliente;
 import cast.testapp.invoice.boundary.InvoiceFileReader;
 import cast.testapp.invoice.boundary.impl.InvoiceFileReaderImpl;
 import cast.testapp.invoice.boundary.InvoiceManager;
@@ -52,6 +52,31 @@ public class InvoiceController {
         //BR1	Listar Facturas Pendientes por cliente, fecha de vencimiento
         return Collections.EMPTY_LIST;
     }
+    public Boolean invalidateInvoce(Integer invoiceId){
+        
+        //Verificar que exista la factura
+        checkIfInvoiceExists(invoiceId);
+        //cambiar de estado de la factura
+        
+        //notificar al contador
+        
+        //pagar tu impuesto
+        
+        return true;
+    }
+    protected  Boolean checkIfInvoiceExists(Integer invoiceId){
+        if (invoiceId == null){
+            throw new IllegalArgumentException("Error invoiceId cannot be null");
+        }
+        if (invoiceId < 0){
+            throw new IllegalArgumentException("Error invoiceId cannot be negative");
+        }
+        Invoice invoice = invoiceMgr.getById(invoiceId);
+        if (invoice != null)
+            return true;
+        else
+            return false;
+    }   
 
     public Boolean importarFacturasCsv(String filePath) {
         try {
@@ -76,8 +101,7 @@ public class InvoiceController {
         //Calcular ivas
         invoice = new Invoice();
         invoice.setCustomerCode(customer.numeroDoc);
-        int result = invoiceMgr.create(invoice);
-        if(result == 0){
+        if( invoiceMgr.create(invoice) != null){
             throw new IllegalStateException("NO pudo insertar");
         }
         return invoice;

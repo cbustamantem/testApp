@@ -32,7 +32,15 @@ public class InvoiceManagerImpl implements InvoiceManager {
 	}
 
 	public String getStatement() {
-		String statement = "SELECT id, balance, cancelled, cancelled_date, cancelled_reason, creation_date, currency, currency_code, currency_exchange, customer_address, customer_code, customer_company_alias, customer_fiscal_number, customer_name, customer_phone, discount_rate, discount_total, exempt_total, fiscal_stamp_number, gross_total, invoice_branch, invoice_number, invoice_printer, invoice_type, invoicing_date, net_total, observation, status, tenant_id, term, type, vat05total, vat10total, vat_total, vatted05total, vatted10total FROM invoice";
+		String statement = "SELECT id, balance, cancelled, cancelled_date, "
+                        + "cancelled_reason, creation_date, currency, currency_code, "
+                        + "currency_exchange, customer_address, customer_code, "
+                        + "customer_company_alias, customer_fiscal_number, "
+                        + "customer_name, customer_phone, discount_rate, discount_total, "
+                        + "exempt_total, fiscal_stamp_number, gross_total, invoice_branch, "
+                        + "invoice_number, invoice_printer, invoice_type, invoicing_date, "
+                        + "net_total, observation, status, tenant_id, term, type, vat05total, "
+                        + "vat10total, vat_total, vatted05total, vatted10total FROM invoice";
 		return statement;
 	}
 
@@ -82,12 +90,8 @@ public class InvoiceManagerImpl implements InvoiceManager {
 		}
 	}
 
-	public static void main(String[] args) {
-		List<Invoice> listInvoice = new InvoiceManagerImpl().getAll();
-		listInvoice.forEach(i -> System.out.println("d: " + i.toString()));
-	}
-
-	public Integer create(Invoice entity) {
+	@Override
+	public Invoice create(Invoice entity) {
 		String statement = "INSERT INTO invoice (id, balance, cancelled, cancelled_date, cancelled_reason, creation_date, currency, currency_code, currency_exchange, customer_address, customer_code, customer_company_alias, customer_fiscal_number, customer_name, customer_phone, discount_rate, discount_total, exempt_total, fiscal_stamp_number, gross_total, invoice_branch, invoice_number, invoice_printer, invoice_type, invoicing_date, net_total, observation, status, tenant_id, term, type, vat05total, vat10total, vat_total, vatted05total, vatted10total ) VALUES ( ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		try (PreparedStatement s1 = ConnectionManager.getConnection()
 				.prepareStatement(statement)) {
@@ -129,13 +133,13 @@ public class InvoiceManagerImpl implements InvoiceManager {
 			s1.setDouble(36, entity.getVatted10total());
 			Integer rs = s1.executeUpdate();
 			if (rs > 0) {
-				return 1;
+				return entity;
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			return 0;
+			return null;
 		}
-		return 0;
+		return null;
 	}
 
 //    @Override
@@ -154,11 +158,30 @@ public class InvoiceManagerImpl implements InvoiceManager {
     }
 
     @Override
-    public Invoice getById(Integer key) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Invoice getById(Integer id) {
+        Invoice invoice = new Invoice();
+        String query = getStatement() + " WHERE  id = " +id;
+		try (PreparedStatement s1 = ConnectionManager.getConnection()
+				.prepareStatement(query)) {
+			s1.setMaxRows(1);
+			try (ResultSet rs = s1.executeQuery()) {
+				while (rs.next()) {
+					 return getFromRsInvoice(rs);
+				}
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			
+		}
+                return null;
     }
 
-  
+    public static void main(String[] args) {
+       InvoiceManagerImpl invoiceMgr =  new InvoiceManagerImpl();
+        Invoice invoice = invoiceMgr.getById(1);
+        System.out.println("Invoice > "+ invoice);
+       
+    }
 
     @Override
     public List<Invoice> getAll(int limit, int offset) {
