@@ -90,8 +90,8 @@ public class InvoiceManagerImpl implements InvoiceManager {
 		}
 	}
 
-	
-	public Integer create(Invoice entity) {
+	@Override
+	public Invoice create(Invoice entity) {
 		String statement = "INSERT INTO invoice (id, balance, cancelled, cancelled_date, cancelled_reason, creation_date, currency, currency_code, currency_exchange, customer_address, customer_code, customer_company_alias, customer_fiscal_number, customer_name, customer_phone, discount_rate, discount_total, exempt_total, fiscal_stamp_number, gross_total, invoice_branch, invoice_number, invoice_printer, invoice_type, invoicing_date, net_total, observation, status, tenant_id, term, type, vat05total, vat10total, vat_total, vatted05total, vatted10total ) VALUES ( ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		try (PreparedStatement s1 = ConnectionManager.getConnection()
 				.prepareStatement(statement)) {
@@ -133,13 +133,13 @@ public class InvoiceManagerImpl implements InvoiceManager {
 			s1.setDouble(36, entity.getVatted10total());
 			Integer rs = s1.executeUpdate();
 			if (rs > 0) {
-				return 1;
+				return entity;
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			return 0;
+			return null;
 		}
-		return 0;
+		return null;
 	}
 
 //    @Override

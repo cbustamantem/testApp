@@ -5,14 +5,9 @@
  */
 package cast.testapp.invoice.controller;
 
-import cast.testapp.catastro.entities.Cliente;
-import cast.testapp.catastro.entities.DocumentType;
 import cast.testapp.invoice.boundary.InvoiceFileReader;
 import cast.testapp.invoice.boundary.InvoiceManager;
 import cast.testapp.invoice.entities.Invoice;
-import cast.testapp.invoice.entities.InvoiceDetail;
-import java.util.Date;
-import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
