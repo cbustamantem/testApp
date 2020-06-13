@@ -97,7 +97,7 @@ public class InvoiceControllerTest {
         IllegalArgumentException exception = assertThrows( IllegalArgumentException.class, () -> {
             instance.anularFactura(invoice);
         });
-        String actualMessage = exception.getMessage();
+        String actualMessage = exception.getMessage();        
         assertTrue(actualMessage.contains("ERROR: No se encontro factura a anular"));
     }
 }
