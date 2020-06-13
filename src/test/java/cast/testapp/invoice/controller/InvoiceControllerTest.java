@@ -82,7 +82,6 @@ public class InvoiceControllerTest {
         boolean result= instance.checkIfInvoiceExists(id);       
         assertFalse("Should exists the invoice",result);
     }
-
     @Test
     public void anularFacturaOk() {
         Invoice invoice = new Invoice();
