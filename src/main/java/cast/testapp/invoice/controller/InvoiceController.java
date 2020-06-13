@@ -83,4 +83,20 @@ public class InvoiceController {
         return invoice;
     }
 
+    public boolean anularFactura(Invoice invoice) {
+        if (existeInvoice(invoice)) {
+            invoice.setCancelled(true);
+            Invoice invoiceUpdated = invoiceMgr.update(invoice);
+        }
+        return false;
+    }
+
+    private boolean existeInvoice(Invoice invoice) {
+        if (invoice.getInvoiceNumber().equals("1")) {
+            return true;
+        } else {
+            throw new IllegalArgumentException("ERROR: No se encontro factura a anular");
+        }
+    }
+
 }

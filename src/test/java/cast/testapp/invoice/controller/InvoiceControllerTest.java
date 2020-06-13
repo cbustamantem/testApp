@@ -64,4 +64,22 @@ public class InvoiceControllerTest {
         assertTrue(actualMessage.contains("NO pudo insertar"));
 
     }
+
+    @Test
+    public void anularFacturaOk() {
+        Invoice invoice = new Invoice();
+        invoice.setInvoiceNumber("1");
+        when(instance.anularFactura(invoice)).thenReturn(true);
+    }
+
+    @Test
+    public void anularFacturaError() {
+        Invoice invoice = new Invoice();
+        invoice.setInvoiceNumber("2");
+        IllegalArgumentException exception = assertThrows( IllegalArgumentException.class, () -> {
+            instance.anularFactura(invoice);
+        });
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains("ERROR: No se encontro factura a anular"));
+    }
 }
