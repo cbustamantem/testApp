@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>   
     <groupId>cast.testapp</groupId>
     <artifactId>facturacion</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.3-SNAPSHOT</version>
     <name>CAST.Facturacion</name>
     <description>Cast Facturacion</description>
  
