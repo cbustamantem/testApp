@@ -28,7 +28,7 @@ public class ConnectionManager {
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost/db_cast", "cbustamante", "12345");
+                    "jdbc:postgresql://dbcast/db_cast", "docker", "docker");
         } catch (SQLException ex) {
             ex.printStackTrace();
             return null;

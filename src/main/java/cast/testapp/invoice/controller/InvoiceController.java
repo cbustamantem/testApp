@@ -95,13 +95,14 @@ public class InvoiceController {
         return false;
     }
 
-    public Invoice createInvoice(Cliente customer, List<InvoiceDetail> invoiceDetailsList){
+    public Invoice createInvoice(String customerCode, List<InvoiceDetail> invoiceDetailsList){
         Invoice invoice = null;
         //Obtener los datos de timbrado y numeración
         //Calcular ivas
         invoice = new Invoice();
-        invoice.setCustomerCode(customer.numeroDoc);
-        if( invoiceMgr.create(invoice) != null){
+        loadDummyInvoice(invoice);
+        invoice.setCustomerCode(customerCode);
+        if( invoiceMgr.create(invoice) == null){
             throw new IllegalStateException("NO pudo insertar");
         }
         return invoice;
@@ -121,6 +122,52 @@ public class InvoiceController {
         } else {
             throw new IllegalArgumentException("ERROR: No se encontro factura a anular");
         }
+    }
+
+    public List<Invoice> getAllInvoices(){
+        return invoiceMgr.getAll();
+    }
+
+    private void loadDummyInvoice(Invoice entity){
+
+        java.sql.Date defaultDate = new java.sql.Date(System.currentTimeMillis());
+
+//        entity.setId(1);
+        entity.setBalance(0.0);
+        entity.setCancelled(false);
+        entity.setCancelledDate(defaultDate);
+        entity.setCancelledReason("");
+        entity.setCreationDate(defaultDate);
+        entity.setCurrency("");
+        entity.setCurrencyCode("");
+        entity.setCurrencyExchange(0.0);
+        entity.setCustomerAddress("");
+        entity.setCustomerCode("");
+        entity.setCustomerCompanyAlias("");
+        entity.setCustomerFiscalNumber("");
+        entity.setCustomerName("");
+        entity.setCustomerPhone("");
+        entity.setDiscountRate(0.0);
+        entity.setDiscountTotal(0.0);
+        entity.setExemptTotal(0.0);
+        entity.setFiscalStampNumber("");
+        entity.setGrossTotal(0.0);
+        entity.setInvoiceBranch("");
+        entity.setInvoiceNumber("");
+        entity.setInvoicePrinter("");
+        entity.setInvoiceType("");
+        entity.setInvoicingDate(defaultDate);
+        entity.setNetTotal(0.0);
+        entity.setObservation("");
+        entity.setStatus("");
+        entity.setTenantId(0);
+        entity.setTerm(0);
+        entity.setType("");
+        entity.setVat05total(0.0);
+        entity.setVat10total(0.0);
+        entity.setVatTotal(0.0);
+        entity.setVatted05total(0.0);
+        entity.setVatted10total(0.0);
     }
 
 }
